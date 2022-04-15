@@ -4,6 +4,7 @@ pipeline {
     stage('build') {
       steps {
         echo 'this is my ${myvar}'
+        sh 'echo "Message printed by shell script ${myvar}"'
       }
     }
 
