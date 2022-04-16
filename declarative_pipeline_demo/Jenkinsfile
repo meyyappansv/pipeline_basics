@@ -1,0 +1,34 @@
+pipeline {
+    agent any 
+
+    stages {
+
+        stage("Build"){
+            environment{
+                var1 = "val1"
+                var2="val2"
+            }
+            steps{
+                sh "echo var1: ${val1}"
+                sh "echo var2: ${val2}"
+            }
+
+        }
+
+        stage("Test"){
+
+            environment{
+                var3= = "val3"
+                
+            }
+
+            steps {
+                sh """
+
+                     echo 'var2: ${var2}'
+                     echo 'var3: ${valr3}'
+                """
+            }
+        }
+    }
+}
