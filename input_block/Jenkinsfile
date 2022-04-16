@@ -16,6 +16,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo "Testing release ${RELEASE}..."
+                echo "LOG LEVEL in Test: ${TEST}"
             }
         }
         stage('Deploy') {
@@ -33,7 +34,12 @@ pipeline {
     }
     post{
         always {
+           
              echo 'Prints whether deploy happened or not, success or failure'
+        }
+
+        failure {
+            echo 'Prints on  failure'
         }
     }
 }
