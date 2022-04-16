@@ -16,7 +16,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo "Testing release ${RELEASE}..."
-                echo "LOG LEVEL in Test: ${TEST}"
+               // echo "LOG LEVEL in Test: ${TEST}"
             }
         }
         stage('Deploy') {
