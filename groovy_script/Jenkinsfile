@@ -1,0 +1,48 @@
+pipeline {
+   agent any
+    environment {
+      RELEASE='20.04'
+    }
+   stages {
+      stage('Build') {
+            environment {
+               LOG_LEVEL='INFO'
+            }
+            steps {
+               echo "Building release ${RELEASE} with log level ${LOG_LEVEL}..."
+               withCredentials([string(credentialsId: 'tessecret',variable: 'TESTSECRET')]){
+
+                   sh '''
+                        chmod +x ./slack_send/test.sh
+                        ./slack_send/test.sh
+                   '''
+
+               }
+            }
+        }
+        stage('Test') {
+            steps {
+               echo "Testing release ${RELEASE}"
+               script {
+                  if (Math.random() > 0.5) {
+                     throw new Exception()
+                  }
+               }
+               writeFile file: 'test-results.txt', text: 'passed'
+                        
+            }
+        }
+   }
+   post {
+      success {
+         archiveArtifacts 'test-results.txt'
+         slackSend channel: '#general',
+                   message: "Release ${env.RELEASE}, success: ${currentBuild.fullDisplayName}."
+         
+      }
+      failure {
+          slackSend channel: '#general',
+                   message: "Release ${env.RELEASE}, failed: ${currentBuild.fullDisplayName}."
+      }
+   }
+}
