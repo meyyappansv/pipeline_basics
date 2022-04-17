@@ -24,13 +24,13 @@ pipeline {
         stage('Build') {
             steps {
               echo "Building version: ${VERSION} with suffix: ${VERSION_RC}"
-              sh 'mvnw clean build'
+              sh './mvnw clean build'
             
             }
         }
         stage('Unit Test') {
             steps {
-              sh 'mvnw clean test'
+              sh './mvnw clean test'
             }
         }
         stage('Package') {
@@ -38,7 +38,7 @@ pipeline {
                 expression {return params.RC }
             }
             steps {
-                sh 'mvnw clean package'
+                sh './mvnw clean package'
                 archiveArtifacts './target/*.jar'
             }
         }
