@@ -14,7 +14,7 @@ pipeline {
 
                    sh '''
                         chmod +x ./test.sh
-                        ./test.sh
+                        ./slack_send/test.sh
                    '''
 
                }
