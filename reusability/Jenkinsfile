@@ -34,6 +34,7 @@ pipeline {
             }
         }
         stage('Get Input'){
+        steps {
         input {
                 message 'Deploy?'
                 ok 'Do it!'
@@ -41,6 +42,7 @@ pipeline {
                     booleanParam(name: 'RELEASE_VERSION', defaultValue: false, description: 'is this release version')
                 }
             }
+        }
         }
         stage('Package') {
             when {
