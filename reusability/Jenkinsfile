@@ -33,9 +33,18 @@ pipeline {
               sh './mvnw clean test'
             }
         }
+        stage('Get Input'){
+        input {
+                message 'Deploy?'
+                ok 'Do it!'
+                parameters {
+                    booleanParam(name: 'RELEASE_VERSION', defaultValue: false, description: 'is this release version')
+                }
+            }
+        }
         stage('Package') {
             when {
-                expression {return params.RC }
+                expression {return params.RELEASE_VERSION }
             }
             steps {
                 sh './mvnw clean package'
