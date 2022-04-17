@@ -39,8 +39,12 @@ pipeline {
                 message 'Deploy?'
                 ok 'Do it!'
                 parameters {
-                    string(name: 'RELEASE_VERSION', defaultValue: false, description: 'is this release version')
+                    string(name: 'RELEASE_VERSION', defaultValue: 'false', description: 'is this release version')
                 }
+            }
+
+            steps{
+                echo "Getting input for release version"
             }
         
         }
