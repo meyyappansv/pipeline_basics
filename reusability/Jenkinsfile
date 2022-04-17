@@ -50,7 +50,7 @@ pipeline {
         }
         stage('Package') {
             when {
-                expression { return RELEASE_VERSION == 'true'; }
+                expression { return "${RELEASE_VERSION}" == 'true'; }
             }
             steps {
                 sh './mvnw clean package'
