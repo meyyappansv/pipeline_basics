@@ -1,0 +1,54 @@
+pipeline {
+    agent any
+    environment {
+        VERSION = "0.1.0"        
+        VERSION_RC = "rc.2"
+    }
+    parameters{
+        booleanParam(name: 'RC', defaultValue: false,description: 'Chooses wether we need to generate RC candidate' )
+    }
+    stages {
+        stage('Audit tools') {                        
+            steps {
+                sh '''
+                  git version
+                 
+                '''
+            }
+        }
+        stage ('Checkout Code'){
+            steps{
+            echo "Im checking out code"
+            }
+        }
+        stage('Build') {
+            steps {
+              echo "Building version: ${VERSION} with suffix: ${VERSION_RC}"
+              
+            
+            }
+        }
+        stage('Unit Test') {
+            steps {
+              echo "Im testing code"
+            }
+        }
+        
+        stage('Package') {
+            input {
+                message 'Deploy?'
+                ok 'Do it!'
+                parameters {
+                    string(name: 'RELEASE_VERSION', defaultValue: 'false', description: 'is this release version')
+                }
+            }
+            when {
+                //expression { return "${RELEASE_VERSION}" == 'true'; }
+                expression { return params.RC }
+            }
+            steps {
+                echo "Im packaging code because this is release version"
+            }
+        }
+    }
+}
