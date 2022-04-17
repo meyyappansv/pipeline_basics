@@ -10,7 +10,7 @@ pipeline {
             }
             steps {
                echo "Building release ${RELEASE} with log level ${LOG_LEVEL}..."
-               withCredentials([string(credentialsId: 'testsecret',variable: 'TESTSECRET')]){
+               withCredentials([string(credentialsId: 'tessecret',variable: 'TESTSECRET')]){
 
                    sh '''
                         chmod +x ./slack_send/test.sh
