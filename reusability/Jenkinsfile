@@ -24,7 +24,7 @@ pipeline {
         stage('Build') {
             steps {
               echo "Building version: ${VERSION} with suffix: ${VERSION_RC}"
-              sh './mvnw clean build'
+              sh './mvnw clean compile'
             
             }
         }
