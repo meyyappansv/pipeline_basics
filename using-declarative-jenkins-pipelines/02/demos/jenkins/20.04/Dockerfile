@@ -1,6 +1,6 @@
 FROM alpine:3.11 AS installer
 
-ARG JENKINS_VERSION="2.222.1"
+ARG JENKINS_VERSION="2.332.2"
 
 RUN apk add --no-cache curl
 RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/edge/community docker-cli
@@ -31,7 +31,7 @@ RUN apk add --no-cache \
 
 RUN pip install docker-compose
 
-ARG JENKINS_VERSION="2.222.1"
+ARG JENKINS_VERSION="2.332.2"
 ENV JENKINS_VERSION=${JENKINS_VERSION} \
     JENKINS_HOME="/data"
 
