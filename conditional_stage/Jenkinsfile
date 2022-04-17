@@ -33,22 +33,15 @@ pipeline {
               sh './mvnw clean test'
             }
         }
-        stage('Get Input'){
         
-        input {
+        stage('Package') {
+            input {
                 message 'Deploy?'
                 ok 'Do it!'
                 parameters {
                     string(name: 'RELEASE_VERSION', defaultValue: 'false', description: 'is this release version')
                 }
             }
-
-            steps{
-                echo "Getting input for release version"
-            }
-        
-        }
-        stage('Package') {
             when {
                 expression { return "${RELEASE_VERSION}" == 'true'; }
             }
