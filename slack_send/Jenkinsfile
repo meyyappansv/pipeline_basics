@@ -24,7 +24,7 @@ pipeline {
             steps {
                echo "Testing release ${RELEASE}"
                writeFile file: 'test-results.txt', text: 'passed'
-               sh 'false'           
+                        
             }
         }
    }
