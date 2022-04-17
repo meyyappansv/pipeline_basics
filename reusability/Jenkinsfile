@@ -34,19 +34,19 @@ pipeline {
             }
         }
         stage('Get Input'){
-        steps {
+        
         input {
                 message 'Deploy?'
                 ok 'Do it!'
                 parameters {
-                    booleanParam(name: 'RELEASE_VERSION', defaultValue: false, description: 'is this release version')
+                    string(name: 'RELEASE_VERSION', defaultValue: false, description: 'is this release version')
                 }
             }
-        }
+        
         }
         stage('Package') {
             when {
-                expression {return params.RELEASE_VERSION }
+                expression {if(params.RELEASE_VERSION == 'true') return true }
             }
             steps {
                 sh './mvnw clean package'
