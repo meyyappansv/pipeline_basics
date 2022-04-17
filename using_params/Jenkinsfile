@@ -44,10 +44,10 @@ pipeline {
             }
             when {
                 //expression { return "${RELEASE_VERSION}" == 'true'; }
-                expression { return params.RC }
+                expression { return RC }
             }
             steps {
-                echo "Im packaging code because this is release version"
+                echo "Im packaging code because this is release version ${RC}"
             }
         }
     }
