@@ -1,0 +1,59 @@
+pipeline {
+    agent any
+    environment {
+        VERSION = "0.1.0"        
+        VERSION_RC = "rc.2"
+    }
+    parameters{
+        booleanParam(name: 'RC', defaultValue: false,description: 'Chooses wether we need to generate RC candidate' )
+    }
+    stages {
+        stage('Audit tools') {                        
+            steps {
+                sh '''
+                  git version
+                 
+                '''
+            }
+        }
+        stage ('Checkout Code'){
+            steps{
+            echo "Im checking out code"
+            }
+        }
+        stage('Build') {
+            steps {
+              VERSION_SUFFIX = getVersionSuffix()
+
+              echo "Building version: ${VERSION} with suffix: ${VERSION_RC}"
+              echo "VERSION SUFFIX ${VERSION_SUFFIX}"
+              
+            
+            }
+        }
+        stage('Unit Test') {
+            steps {
+             echo "Performing unit test"
+            }
+        }
+        
+        stage('Package') {
+            
+            when {
+                expression { return RC }
+            }
+            steps {
+                echo "Archiving artifacts for RC version"
+            }
+        }
+    }
+}
+
+Strign getVersionSuffix(){
+
+    if (params.RC) {
+        return env.VERSION_RC
+    } else {
+        return env.VERSION_RC + '+ci.' + env.BUILD_NUMBER
+    }
+}
