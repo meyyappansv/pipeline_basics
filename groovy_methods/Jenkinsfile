@@ -22,8 +22,12 @@ pipeline {
             }
         }
         stage('Build') {
+
+            environment {
+                VERSION_SUFFIX = getVersionSuffix()
+            }
             steps {
-              VERSION_SUFFIX = getVersionSuffix()
+              
 
               echo "Building version: ${VERSION} with suffix: ${VERSION_RC}"
               echo "VERSION SUFFIX ${VERSION_SUFFIX}"
