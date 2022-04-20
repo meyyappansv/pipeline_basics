@@ -24,13 +24,13 @@ pipeline {
         stage('Build') {
 
             environment {
-                VERSION_SUFFIX = getVersionSuffix isReleaseCandidate: true, rcNumber: "${VERSION_RC}"
+                VERSION_SUFFIX = getVersionSuffix isReleaseCandidate: "${RC}", rcNumber: "${VERSION_RC}"
             }
             steps {
               
 
               echo "Building version: ${VERSION} with suffix: ${VERSION_RC}"
-              //echo "VERSION SUFFIX ${VERSION_SUFFIX}"
+              echo "VERSION SUFFIX ${VERSION_SUFFIX}"
               testParams val1: "Hello", val2: "World"
               
             
