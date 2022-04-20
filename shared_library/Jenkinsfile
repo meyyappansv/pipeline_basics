@@ -24,7 +24,7 @@ pipeline {
         stage('Build') {
 
             environment {
-                VERSION_SUFFIX = getVersionSuffix isReleaseCandidate:${params.RC}, rcNumber: ${VERSION_RC}
+                VERSION_SUFFIX = getVersionSuffix isReleaseCandidate: ${params.RC}, rcNumber: ${VERSION_RC}
             }
             steps {
               
