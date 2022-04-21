@@ -1,0 +1,22 @@
+pipeline {
+    agent {
+        docker {
+            image 'node:latest'
+        }
+    }
+    environment {
+        VERSION = "0.1.0"        
+        VERSION_RC = "rc.2"
+    }
+    parameters{
+        booleanParam(name: 'RC', defaultValue: false,description: 'Chooses wether we need to generate RC candidate' )
+    }
+    stages {
+        stage('Test Tools'){
+            steps {
+                sh 'node --version'
+            }
+        }
+    }
+}
+
