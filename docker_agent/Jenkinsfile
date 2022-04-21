@@ -1,9 +1,6 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:latest'
-        }
-    }
+    agent any
+    
     environment {
         VERSION = "0.1.0"        
         VERSION_RC = "rc.2"
@@ -15,6 +12,7 @@ pipeline {
         stage('Test Tools'){
             steps {
                 sh 'node --version'
+                sh 'docker --version'
             }
         }
     }
