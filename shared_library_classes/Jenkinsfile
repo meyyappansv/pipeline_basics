@@ -1,0 +1,60 @@
+library identifier: 'jenkins_shared_library@master', 
+        retriever: modernSCM([$class: 'GitSCMSource', remote: 'https://github.com/meyysevugan/jenkins_shared_library.git'])
+
+pipeline {
+    agent any
+    environment {
+        VERSION = "0.1.0"        
+        VERSION_RC = "rc.2"
+    }
+    parameters{
+        booleanParam(name: 'RC', defaultValue: false,description: 'Chooses wether we need to generate RC candidate' )
+    }
+    stages {
+        stage('Audit tools') {                        
+            steps {
+               auditTools()
+            }
+        }
+        stage ('Checkout Code'){
+            steps{
+            echo "Im checking out code"
+            }
+        }
+        stage('Build') {
+
+            environment {
+                VERSION_SUFFIX = getVersionSuffix isReleaseCandidate: "${RC}", rcNumber: "${VERSION_RC}"
+            }
+            steps {
+              
+
+              echo "Building version: ${VERSION} with suffix: ${VERSION_RC}"
+              echo "VERSION SUFFIX ${VERSION_SUFFIX}"
+              testParams val1: "Hello", val2: "World"
+              
+            
+            }
+        }
+        stage('Unit Test') {
+            steps {
+             echo "Performing unit test"
+            }
+        }
+
+        stage('Loading method from class'){
+            logInfo.info("INFO")
+        }
+        
+        stage('Package') {
+            
+            when {
+                expression { return RC }
+            }
+            steps {
+                echo "Archiving artifacts for RC version"
+            }
+        }
+    }
+}
+
