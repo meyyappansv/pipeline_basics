@@ -43,7 +43,9 @@ pipeline {
         }
 
         stage('Loading method from class'){
+            script {
             logInfo.info("INFO")
+            }
         }
         
         stage('Package') {
