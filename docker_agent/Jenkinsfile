@@ -1,16 +1,13 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:16-alpine'
-        }
-    }
+    agent any
+    
     
     
     stages {
         stage('Test Tools'){
             steps {
                 
-                echo "Hello world"
+                sh 'docker image ls'
             }
         }
     }
