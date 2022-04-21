@@ -1,7 +1,7 @@
 
 library identifier: 'jenkins_shared_library@master', 
         retriever: modernSCM([$class: 'GitSCMSource', remote: 'https://github.com/meyysevugan/jenkins_shared_library.git'])
-import Logger 
+import com.Logger 
 
 pipeline {
     agent any
