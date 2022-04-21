@@ -45,7 +45,9 @@ pipeline {
         stage('Loading method from class'){
             steps {
             script {
-            logInfo.info "INFO"
+            
+            loggerHandle = new Logger()
+            loggerHandle.info("Hello World")
             }
             }
         }
