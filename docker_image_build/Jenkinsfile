@@ -10,7 +10,7 @@ pipeline {
             steps {
                 
                 script {
-                    image = docker.build("dockerbuildtest:1.0","-f docker_image_build/Dockerfile")
+                    image = docker.build("dockerbuildtest:1.0","docker_image_build")
                 }
             }
         }
