@@ -25,6 +25,7 @@ pipeline {
         stage('Smoke Test'){
             steps {
                 script {
+                    println "Inside the script block: ${testVar}"
                     container = image.run()
                     container.stop()
                 }
