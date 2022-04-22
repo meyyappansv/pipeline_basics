@@ -13,7 +13,7 @@ pipeline {
             steps {
                 
                 sh 'node --version'
-                sh 'cat ./config.txt'
+                sh 'cat config.txt'
             }
         }
     }
