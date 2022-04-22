@@ -1,0 +1,21 @@
+pipeline {
+    agent {
+        dockerfile {
+            dir 'docker_agent'
+            file 'Dockerfile'
+        }
+    }
+    
+    
+    
+    stages {
+        stage('Test Tools'){
+            steps {
+                
+                sh 'node --version'
+                sh 'cat ./config.txt'
+            }
+        }
+    }
+}
+
