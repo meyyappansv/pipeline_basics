@@ -1,4 +1,5 @@
 def image
+def testVar="Hello World"
 pipeline {
     agent any
     
@@ -12,6 +13,12 @@ pipeline {
                 script {
                     image = docker.build("meyysevugan/testimages:1.0","docker_image_build")
                 }
+            }
+        }
+        stage('Test Global Var'){
+            steps{
+                
+                sh "echo ${testVar}"
             }
         }
 
