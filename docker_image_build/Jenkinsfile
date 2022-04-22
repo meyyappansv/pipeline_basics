@@ -1,0 +1,38 @@
+def image
+pipeline {
+    agent any
+    
+    
+    
+    
+    stages {
+        stage('Build Image'){
+            steps {
+                
+                script {
+                    image = docker.build("dockerbuildtest:1.0","-f docker_image_build/Dockerfile")
+                }
+            }
+        }
+
+        stage('Smoke Test'){
+            steps {
+                script {
+                    container = image.run()
+                    container.stop()
+                }
+            }
+        }
+
+        stage('Image Push'){
+            steps {
+                script {
+                    docker.withRegistry('', 'docker-creds'){
+                        image.push()
+                    }
+                }
+            }
+        }
+    }
+}
+
