@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Test Tools'){
             steps {
-                sh 'ls -l'
+                sh 'pwd'
                 sh 'node --version'
                 sh 'cat config.txt'
             }
