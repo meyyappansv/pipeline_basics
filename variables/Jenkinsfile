@@ -10,8 +10,10 @@ pipeline {
     stages {
 
         stage('Process parameters'){
+            steps {
             echo "Accessing parameter value using format params.<NAME>: ${params.VERSION}"
             echo "Accessing parameter value using format <NAME>: ${VERSION}"
+            }
         }
     }
 }
