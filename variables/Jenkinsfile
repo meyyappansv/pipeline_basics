@@ -1,0 +1,17 @@
+pipeline {
+
+
+    agent any 
+
+    parameters{
+        string(name:'VERSION',defaultValue:'2.0',description:'Release version')
+    }
+
+    stages {
+
+        stage('Process parameters'){
+            echo "Accessing parameter value using format params.<NAME>: ${params.VERSION}"
+            echo "Accessing parameter value using format <NAME>: ${VERSION}"
+        }
+    }
+}
